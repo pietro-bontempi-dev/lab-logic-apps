@@ -1,0 +1,51 @@
+Lab Logic Apps
+
+Primeiro criar um HTTP Trigger e um Logic App
+A saída será em uma Fila{LogicApp}
+Será utilizada a função Fn {Ler Fila}
+Em seguida irá para a função FN {SalvarSQL} - Esta irá salvar no Banco de Dados SQL
+Criar o Logic APP no Microsoft Azure
+app-dio-serverless
+Name(dio-serverless)
+Após o processamento, entrar nos recursos e adicionar um Trigger
+When a HTTP request is received
+{
+'name': ""
+'idade': 1
+}
+
+Criar a fila com Service BUS - sbfilaprocesso
+Abrir o Post e colar o endereço pego
+{"name": "Pietro", "idade": 20}
+Entrar no service bus - sb
+Conectar no service bus uma logic app somente para envio
+colocar a connection string no app-dio-serverless
+criar uma fila logicapp
+Adicionar uma logicappuser só de envio
+Colocar a conexão criado
+
+Definir o conteudo da mensagem como conteúdo do banho
+Criar um Response 201 como Status
+Adicionar mensagem "Item incluído na Fila"
+
+Azure Functions Data Base
+Para esse processo, deverá ser criado o banco de dados em que serão armazenadas as solicitações HTTP do Logic app.
+Deve ser criado um Function APP e salvá-lo no dio-serveless, após isso inserir a função fn-save-database
+Criar um deploy com um novo perfil publish e fazer a publica.
+Colocar a Connection String nas variáveis de ambiente.
+adicionar o parametro para autorizar o post.
+
+Azure Function Service Bus
+No portal do Azure, crie um Function App chamado app-dio-serverless.
+No Function App, crie uma nova Function com o nome Fn-LerFila.
+Selecione o gatilho Service Bus Trigger.
+Configure a Connection String do Service Bus na configuração de aplicativo (variáveis de ambiente) para conectar a fila sbfila.
+Configurar a função para ler a fila:
+
+Na função Fn-LerFila, defina o código para processar a mensagem recebida da fila, como o exemplo abaixo:
+public static async Task Run(
+    [ServiceBusTrigger("sbfila", Connection = "ServiceBusConnection")] string message, 
+    ILogger log)
+{
+    log.LogInformation($"Message received: {message}");
+}
